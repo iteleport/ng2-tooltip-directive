@@ -839,9 +839,12 @@ var TooltipDirective = /** @class */ (function () {
          */
         function () {
             /** @type {?} */
-            var check = false;
-            navigator.maxTouchPoints ? check = true : check = false;
-            return check;
+            // var check = false;
+            // navigator.maxTouchPoints ? check = true : check = false;
+            // return check;
+            var isAndroid = !!navigator.userAgent.match(/(Android)/);
+            var isIos = !!navigator.userAgent.match(/(iPod|iPhone|iPad)/);
+            return isIos || isAndroid;
         },
         enumerable: true,
         configurable: true
