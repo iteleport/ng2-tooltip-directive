@@ -1,4 +1,5 @@
 import { ElementRef, ComponentFactoryResolver, ApplicationRef, Injector, EventEmitter } from '@angular/core';
+import { TooltipOptions } from './tooltip-options.interface';
 export interface AdComponent {
     data: any;
     show: boolean;
@@ -6,6 +7,7 @@ export interface AdComponent {
     events: any;
 }
 export declare class TooltipDirective {
+    private initOptions;
     private elementRef;
     private componentFactoryResolver;
     private appRef;
@@ -24,34 +26,51 @@ export declare class TooltipDirective {
     _defaultOptions: any;
     _destroyDelay: number;
     componentSubscribe: any;
+    set options(value: TooltipOptions);
+    get options(): TooltipOptions;
     tooltipValue: string;
-    options: any;
     placement: string;
+    autoPlacement: boolean;
     contentType: string;
-    delay: number;
     hideDelayMobile: number;
+    hideDelayTouchscreen: number;
     zIndex: number;
     animationDuration: number;
     trigger: string;
     tooltipClass: string;
     display: boolean;
     displayMobile: boolean;
+    displayTouchscreen: boolean;
     shadow: boolean;
     theme: boolean;
     offset: number;
+    width: number;
     maxWidth: number;
     id: any;
     showDelay: number;
     hideDelay: number;
-    readonly isTooltipDestroyed: any;
-    destroyDelay: number;
+    hideDelayAfterClick: number;
+    pointerEvents: 'auto' | 'none';
+    position: {
+        top: number;
+        left: number;
+    };
+    get isTooltipDestroyed(): any;
+    get destroyDelay(): number;
+    set destroyDelay(value: number);
+    get tooltipPosition(): any;
     events: EventEmitter<any>;
-    constructor(elementRef: ElementRef, componentFactoryResolver: ComponentFactoryResolver, appRef: ApplicationRef, injector: Injector);
+    constructor(initOptions: any, elementRef: ElementRef, componentFactoryResolver: ComponentFactoryResolver, appRef: ApplicationRef, injector: Injector);
     onMouseEnter(): void;
     onMouseLeave(): void;
     onClick(): void;
     ngOnInit(): void;
+    ngOnChanges(changes: any): void;
     ngOnDestroy(): void;
+    getShowDelay(): any;
+    getHideDelay(): any;
+    getProperties(changes: any): any;
+    renameProperties(options: TooltipOptions): TooltipOptions;
     getElementPosition(): void;
     createTooltip(): void;
     destroyTooltip(options?: {
@@ -61,9 +80,9 @@ export declare class TooltipDirective {
     hideTooltip(): void;
     appendComponentToBody(component: any, data?: any): void;
     clearTimeouts(): void;
-    readonly isDisplayOnHover: boolean;
-    readonly isDisplayOnClick: boolean;
-    readonly isMobile: boolean;
+    get isDisplayOnHover(): boolean;
+    get isDisplayOnClick(): boolean;
+    get isTouchScreen(): boolean;
     applyOptionsDefault(defaultOptions: any, options: any): void;
     handleEvents(event: any): void;
     show(): void;
